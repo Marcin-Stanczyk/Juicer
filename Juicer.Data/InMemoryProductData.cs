@@ -20,6 +20,10 @@ namespace Juicer.Data
             };
         }
 
+        public Product GetProductById(int id)
+        {
+            return products.SingleOrDefault(p => p.Id == id);
+        }
 
         public IEnumerable<Product> GetProductsByName(string name = null)
         {

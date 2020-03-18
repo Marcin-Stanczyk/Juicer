@@ -6,5 +6,7 @@ namespace Juicer.Data
     public interface IProductData
     {
         IEnumerable<Product> GetProductsByName(string name);
+
+        Product GetProductById(int id);
     }
 }
