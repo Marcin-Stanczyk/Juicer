@@ -2,12 +2,12 @@
 {
     public enum CategoryType
     {
-        Brak,
-        Jagodowe,
-        Łupinowe,
-        Pestkowe,
-        Suszone,
-        Tropikalne,
-        Ziarnkowe
+        None,
+        Berries,
+        Citrus,
+        Drupes,
+        Melons,
+        Pomes,
+        Tropical,
     }
 }

@@ -1,0 +1,15 @@
+﻿@page "{productId:int}"
+@model Juicer.Pages.Products.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    Name: @Model.Product.Name
+    Id: @Model.Product.Id
+</div>
+<div>
+    Category: @Model.Product.Category
+</div>
+
+<a asp-page="./List" class="btn btn-primary">All Products</a>

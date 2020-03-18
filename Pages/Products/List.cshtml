@@ -1,0 +1,42 @@
+﻿@page
+@model ListModel
+@{
+    ViewData["Title"] = "Lista owoców";
+}
+
+<h1>Owoce</h1>
+
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" asp-for="SearchTerm" />
+            <div class="input-group-append">
+                <button class="btn btn-default">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+        </div>
+    </div>
+
+</form>
+
+
+<table class="table">
+    @foreach(var product in Model.Products)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.Category</td>
+            <td>
+                <a class="btn"
+                   asp-page="./Details"
+                   asp-route-productId="@product.Id">
+                    <i class="fas fa-search"></i>
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+
