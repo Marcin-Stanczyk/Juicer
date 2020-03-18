@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Juicer.Core
@@ -9,8 +10,13 @@ namespace Juicer.Core
     {
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(25)]
         public string Name { get; set; }
 
+
+        // To Do: Validate if Category is not CategoryType.None
+        [Required]
         public CategoryType Category { get; set; }
     }
 }

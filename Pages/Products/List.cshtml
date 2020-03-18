@@ -4,8 +4,8 @@
     ViewData["Title"] = "Lista owoców";
 }
 
-<h1>Owoce</h1>
-
+<h1>Products</h1>
+<a asp-page="./Edit" class="btn btn-primary">New Product</a>
 
 <form method="get">
     <div class="form-group">
@@ -26,17 +26,24 @@
 <table class="table">
     @foreach(var product in Model.Products)
     {
-        <tr>
-            <td>@product.Name</td>
-            <td>@product.Category</td>
-            <td>
-                <a class="btn"
-                   asp-page="./Details"
-                   asp-route-productId="@product.Id">
-                    <i class="fas fa-search-plus"></i>
-                </a>
-            </td>
-        </tr>
+    <tr>
+        <td>@product.Name</td>
+        <td>@product.Category</td>
+        <td>
+            <a class="btn"
+               asp-page="./Details"
+               asp-route-productId="@product.Id">
+                <i class="fas fa-search-plus"></i>
+            </a>
+        </td>
+        <td>
+            <a class="btn"
+               asp-page="./Edit"
+               asp-route-productId="@product.Id">
+                <i class="far fa-edit"></i>
+            </a>
+        </td>
+    </tr>
     }
 </table>
 

@@ -15,6 +15,9 @@ namespace Juicer.Pages.Products
 
         public Product Product { get; set; }
 
+        [TempData]
+        public string Message { get; set; }
+
         public DetailsModel(IProductData productData)
         {
             this.productData = productData;

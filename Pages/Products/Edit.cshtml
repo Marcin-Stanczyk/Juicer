@@ -1,0 +1,29 @@
+﻿@page "{productId:int?}"
+@model Juicer.Pages.Products.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Editing @Model.Product.Name</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Product.Id" />
+
+    <div class="form-group">
+        <label asp-for="Product.Name"></label>
+        <input asp-for="Product.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Product.Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Category"></label>
+        <select class="form-control" asp-for="Product.Category" asp-items="Model.Categories"></select>
+        <span class="text-danger" asp-validation-for="Product.Category"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="./List" class="btn btn-secondary">Cancel</a>
+
+</form>
+

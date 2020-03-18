@@ -20,6 +20,18 @@ namespace Juicer.Data
             };
         }
 
+        public Product Add(Product newProduct)
+        {
+            products.Add(newProduct);
+            newProduct.Id = products.Max(p => p.Id) + 1;
+            return newProduct;
+        }
+
+        public int Commit()
+        {
+            return 0;
+        }
+
         public Product GetProductById(int id)
         {
             return products.SingleOrDefault(p => p.Id == id);
@@ -32,6 +44,23 @@ namespace Juicer.Data
                 return products;
 
             return products.Where(p => p.Name.ToLower().StartsWith(name.ToLower()));
+        }
+
+
+
+
+        public Product Update(Product updatedProduct)
+        {
+            var product = products.SingleOrDefault(p => p.Id == updatedProduct.Id);
+
+            // To do: implement AutoMapper
+            if (product != null)
+            {
+                product.Name = updatedProduct.Name;
+                product.Category = updatedProduct.Category;
+            }
+            return product;
+
         }
     }
 }
