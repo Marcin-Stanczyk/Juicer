@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juicer", "Juicer.csproj", "{A8500D57-6AAD-43AE-AA91-52A6C792C6BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juicer.Core", "Juicer.Core\Juicer.Core.csproj", "{B348A8F5-2B50-4373-B337-6695BD983FC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juicer.Data", "Juicer.Data\Juicer.Data.csproj", "{182015F6-4CD8-46C8-AD5C-19112DF0ED3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8500D57-6AAD-43AE-AA91-52A6C792C6BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8500D57-6AAD-43AE-AA91-52A6C792C6BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8500D57-6AAD-43AE-AA91-52A6C792C6BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8500D57-6AAD-43AE-AA91-52A6C792C6BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B348A8F5-2B50-4373-B337-6695BD983FC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B348A8F5-2B50-4373-B337-6695BD983FC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B348A8F5-2B50-4373-B337-6695BD983FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B348A8F5-2B50-4373-B337-6695BD983FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{182015F6-4CD8-46C8-AD5C-19112DF0ED3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{182015F6-4CD8-46C8-AD5C-19112DF0ED3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{182015F6-4CD8-46C8-AD5C-19112DF0ED3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{182015F6-4CD8-46C8-AD5C-19112DF0ED3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76F6DBAC-C3D1-4CCD-BC54-460A7D42E7B1}
+	EndGlobalSection
+EndGlobal
