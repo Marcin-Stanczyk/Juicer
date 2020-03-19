@@ -17,9 +17,10 @@ Deployed on Azure.
 1. Created simple inital model of Product for testing purposes
 2. Created interface for Data Repository
 3. Connected to local SQL DB with Entity Framework Core
+4. [Deployed to Azure App Service](https://juicer.azurewebsites.net/)
+5. Connected with Azure SQL Database
 
 #### Next steps
-1. Deploy to Azure App Service
-2. Connect to Azure SQL Database
-3. Add Recipe Model with ingredients (products with it's amount and unit)
-4. Adding images to Azure Blob Storage
+6. Improve Products Page and Model
+7. Add Recipe Model with ingredients (each igredient will be Product with it's amount and unit)
+8. Adding images to Azure Blob Storage
