@@ -15,6 +15,9 @@ namespace Juicer.Pages.Products
 
         public IEnumerable<Product> Products { get; set; }
 
+        [TempData]
+        public string Message { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
 

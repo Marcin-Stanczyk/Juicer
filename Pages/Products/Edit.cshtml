@@ -1,7 +1,7 @@
 ﻿@page "{productId:int?}"
-@model EditModel
+@model Juicer.Pages.Products.EditModel
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = $"Edit {Model.Product.Name}";
 }
 
 <h2>Editing @Model.Product.Name</h2>

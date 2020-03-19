@@ -1,7 +1,7 @@
 ﻿@page "{productId:int}"
-@model DetailsModel
+@model Juicer.Pages.Products.DetailsModel
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.Product.Name;
 }
 
 @if (Model.Message != null)
