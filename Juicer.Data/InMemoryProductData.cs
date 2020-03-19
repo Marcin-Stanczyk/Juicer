@@ -32,6 +32,16 @@ namespace Juicer.Data
             return 0;
         }
 
+        public Product Delete(int id)
+        {
+            var productToDelete = products.FirstOrDefault(p => p.Id == id);
+
+            if (productToDelete != null)
+                products.Remove(productToDelete);
+
+            return productToDelete;
+        }
+
         public Product GetProductById(int id)
         {
             return products.SingleOrDefault(p => p.Id == id);

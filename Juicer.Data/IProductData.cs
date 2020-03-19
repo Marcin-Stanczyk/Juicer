@@ -13,6 +13,8 @@ namespace Juicer.Data
 
         Product Add(Product newProduct);
 
+        Product Delete(int id);
+
         int Commit();
     }
 }
