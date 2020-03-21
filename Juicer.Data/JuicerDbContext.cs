@@ -1,4 +1,6 @@
-﻿using Juicer.Core;
+﻿
+using Juicer.Core;
+using Juicer.Juicer.Core;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,5 +18,9 @@ namespace Juicer.Juicer.Data
         }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Ingredient> Ingredients { get; set; }
+
+        public DbSet<Recipe> Recipes { get; set; }
     }
 }
