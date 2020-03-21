@@ -57,22 +57,29 @@ namespace Juicer.Juicer.Data
 
         public Recipe Add(Recipe newRecipe)
         {
-            throw new NotImplementedException();
+            recipes.Add(newRecipe);
+            newRecipe.Id = recipes.Max(r => r.Id) + 1;
+            return newRecipe;
         }
 
         public int Commit()
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public Recipe Delete(int id)
         {
-            throw new NotImplementedException();
+            var recipeToDelete = recipes.FirstOrDefault(r => r.Id == id);
+
+            if (recipeToDelete != null)
+                recipes.Remove(recipeToDelete);
+
+            return recipeToDelete;
         }
 
         public Recipe GetRecipeById(int id)
         {
-            throw new NotImplementedException();
+            return recipes.SingleOrDefault(r => r.Id == id);
         }
 
         public IEnumerable<Recipe> GetRecipesByName(string name = null)
@@ -85,7 +92,18 @@ namespace Juicer.Juicer.Data
 
         public Recipe Update(Recipe updatedRecipe)
         {
-            throw new NotImplementedException();
+            var recipe = recipes.SingleOrDefault(r => r.Id == updatedRecipe.Id);
+
+            if (recipe != null)
+            {
+                recipe.Name = updatedRecipe.Name;
+                recipe.Description = updatedRecipe.Description;
+                recipe.Instructions = updatedRecipe.Instructions;
+                recipe.Ingredients = updatedRecipe.Ingredients;
+                recipe.PhotoPath = updatedRecipe.PhotoPath;
+            }
+
+            return updatedRecipe;
         }
     }
 }
