@@ -2,12 +2,11 @@
 {
     public enum CategoryType
     {
-        None,
-        Berries,
-        Citrus,
-        Drupes,
-        Melons,
-        Pomes,
-        Tropical,
+        Dairy,
+        Fruits,
+        Grains_Beans_Nuts,
+        Meat,
+        Seafood,
+        Vegetables
     }
 }

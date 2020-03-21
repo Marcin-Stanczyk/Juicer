@@ -12,10 +12,10 @@ namespace Juicer.Data
         {
             products = new List<Product>()
             {
-                new Product { Id = 1, Name = "Strawberries", Category = CategoryType.Berries },
-                new Product { Id = 2, Name = "Lemon", Category = CategoryType.Citrus },
-                new Product { Id = 3, Name = "Mango", Category = CategoryType.Tropical },
-                new Product { Id = 4, Name = "Ananas", Category = CategoryType.Tropical }
+                new Product { Id = 1, Name = "Strawberries", Category = CategoryType.Fruits },
+                new Product { Id = 2, Name = "Lemon", Category = CategoryType.Fruits },
+                new Product { Id = 3, Name = "Mango", Category = CategoryType.Fruits },
+                new Product { Id = 4, Name = "Ananas", Category = CategoryType.Fruits }
 
             };
         }

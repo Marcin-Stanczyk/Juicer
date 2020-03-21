@@ -33,6 +33,8 @@ namespace Juicer
 
             services.AddScoped<IProductData, SqlProductData>();
 
+            services.AddSingleton<IRecipeData, InMemoryRecipeData>();
+
             services.AddRazorPages();
             services.AddControllers();
         }

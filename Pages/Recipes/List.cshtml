@@ -1,9 +1,62 @@
 ﻿@page
 @model Juicer.Pages.Recipes.ListModel
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Recipes";
 }
 
-<h2>Work in progress</h2>
-<p>Here you'll be able to see list of all recipes.</p>
+<h2>Recipes</h2>
+
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" asp-for="SearchTerm" />
+            <div class="input-group-append">
+                <button class="btn btn-lg">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+
+<table class="table">
+    @foreach (var recipe in Model.Recipes)
+    {
+        <tr>
+            <td><img src=@Url.Content(recipe.PhotoPath) class="img-fluid"/></td>
+            <td>@recipe.Name</td>
+            <td>@recipe.Description</td>
+            <td>
+                <ul>
+                    @foreach (var ingredient in recipe.Ingredients)
+                    {
+                    <li>@ingredient.Product.Name @ingredient.Amount @ingredient.Unit</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <a class="btn"
+                   asp-page="./Details"
+                   asp-route-productId="@recipe.Id">
+                    <i class="fas fa-search-plus"></i>
+                </a>
+                <a class="btn"
+                   asp-page="./Edit"
+                   asp-route-productId="@recipe.Id">
+                    <i class="far fa-edit"></i>
+                </a>
+                <a class="btn"
+                   asp-page="./Delete"
+                   asp-route-productId="@recipe.Id">
+                    <i class="far fa-trash-alt"></i>
+                </a>
+            </td>
+
+        </tr>
+    }
+</table>
 

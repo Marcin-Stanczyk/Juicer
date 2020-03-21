@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Juicer.Juicer.Data
 {
-    interface IRecipeData
+    public interface IRecipeData
     {
         IEnumerable<Recipe> GetRecipesByName(string name);
 
