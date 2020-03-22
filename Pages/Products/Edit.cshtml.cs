@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Juicer.Core;
 using Juicer.Data;
+using Juicer.Juicer.Core;
+using Juicer.Juicer.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;

@@ -6,3 +6,11 @@
 
 <h1>Edit</h1>
 
+<form>
+    <div class="form-group">
+        <label asp-for="Recipe.Ingredients[0].Product"></label>
+        <select class="form-control" asp-for="Recipe.Ingredients[0].Product" asp-items="Model.Products"></select>
+        <span class="text-danger" asp-validation-for="Recipe.Ingredients[0].Product"></span>
+    </div>
+</form>
+
