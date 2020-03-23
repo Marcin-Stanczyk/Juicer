@@ -21,5 +21,6 @@ namespace Juicer.Juicer.Core
         public string PhotoPath { get; set; }
 
         public List<Ingredient> Ingredients { get; set; }
+
     }
 }

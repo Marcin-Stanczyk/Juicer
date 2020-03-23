@@ -54,6 +54,7 @@ namespace Juicer.Pages.Recipes
             if (!ModelState.IsValid)
             {
                 Units = htmlHelper.GetEnumSelectList<UnitType>();
+                Products = new SelectList(productData.GetProductsByName(null).Select(p => p.Name));
                 return Page();
             }
 
@@ -65,11 +66,11 @@ namespace Juicer.Pages.Recipes
             else
             {
                 recipeData.Add(Recipe);
-                TempData["Message"] = "Recipe added!";
+                TempData["Message"] = $"Recipe {Recipe.Name} added!";
             }
 
             recipeData.Commit();
-            return RedirectToPage("./Details", new { recipeId = Recipe.Id });
+            return RedirectToPage("./List");
         }
     }
 }

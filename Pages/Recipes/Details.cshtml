@@ -1,0 +1,20 @@
+﻿@page "{recipeId:int}"
+@model Juicer.Pages.Recipes.DetailsModel
+@{
+    ViewData["Title"] = Model.Recipe.Name;
+}
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<h2>@Model.Recipe.Name</h2>
+
+
+<div>
+    Id: @Model.Recipe.Id <br />
+    Name: @Model.Recipe.Name <br />
+    Description: @Model.Recipe.Description <br />
+    Instructions: @Model.Recipe.Instructions <br />
+</div>

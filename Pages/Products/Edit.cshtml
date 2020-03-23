@@ -4,7 +4,15 @@
     ViewData["Title"] = $"Edit {Model.Product.Name}";
 }
 
-<h2>Editing @Model.Product.Name</h2>
+@if (Model.Product.Id > 0)
+{
+    <h2>Editing @Model.Product.Name</h2>
+}
+else
+{
+    <h2>New Product</h2>
+}
+
 
 <form method="post">
 
