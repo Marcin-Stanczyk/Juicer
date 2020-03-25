@@ -14,8 +14,10 @@ namespace Juicer.MappingProfiles
         public RecipeProfile()
         {
             this.CreateMap<Recipe, RecipeDto>();
+            this.CreateMap<RecipeDto, Recipe>();
 
             this.CreateMap<Ingredient, IngredientDto>();
+            this.CreateMap<IngredientDto, Ingredient>();
         }
     }
 }
