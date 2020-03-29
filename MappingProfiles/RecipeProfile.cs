@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Juicer.Core;
 using Juicer.Juicer.Core;
 using Juicer.Juicer.Dtos;
 using System;
@@ -17,7 +18,11 @@ namespace Juicer.MappingProfiles
             this.CreateMap<RecipeDto, Recipe>();
 
             this.CreateMap<Ingredient, IngredientDto>();
-            this.CreateMap<IngredientDto, Ingredient>();
+            this.CreateMap<IngredientDto, Ingredient>()
+                .ForMember(i => i.Product, opt => opt.Ignore());
+
+            this.CreateMap<Product, ProductDto>();
+            this.CreateMap<ProductDto, Product>();
         }
     }
 }

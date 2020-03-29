@@ -8,7 +8,7 @@ namespace Juicer.Juicer.Dtos
 {
     public class IngredientDto
     {
-        public string ProductName { get; set; }
+        public int ProductId { get; set; }
 
         public float Amount { get; set; }
 

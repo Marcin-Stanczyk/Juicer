@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Juicer.Data;
 using Juicer.Juicer.Data;
+using Juicer.JuicerData;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,9 +35,7 @@ namespace Juicer
                 options.UseSqlServer(Configuration.GetConnectionString("JuicerDb"));
             });
 
-            services.AddScoped<IProductData, SqlProductData>();
-
-            services.AddSingleton<IRecipeData, InMemoryRecipeData>();
+            services.AddScoped<IJuicerRepository, JuicerRepository>();
 
             services.AddRazorPages();
             services.AddControllers();

@@ -12,10 +12,8 @@ namespace Juicer.Juicer.Data
     public class JuicerDbContext : DbContext
     {
         public JuicerDbContext(DbContextOptions<JuicerDbContext> options)
-            :base(options)
-        {
-
-        }
+            : base(options)
+        { }
 
         public DbSet<Product> Products { get; set; }
 

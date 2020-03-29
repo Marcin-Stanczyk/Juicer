@@ -7,46 +7,43 @@ namespace Juicer.Data
 {
     public class SqlProductData : IProductData
     {
-        private readonly JuicerDbContext db;
+        private readonly JuicerDbContext context;
 
-        public SqlProductData(JuicerDbContext db)
+        public SqlProductData(JuicerDbContext context)
         {
-            this.db = db;
+            this.context = context;
         }
-
-
-
 
         public Product Add(Product newProduct)
         {
-            db.Products.Add(newProduct);
+            context.Products.Add(newProduct);
             return newProduct;
         }
 
         public int Commit()
         {
-            return db.SaveChanges();
+            return context.SaveChanges();
         }
 
         public Product Delete(int id)
         {
             var product = GetProductById(id);
             if (product != null)
-                db.Products.Remove(product);
+                context.Products.Remove(product);
             return product;
         }
 
         public Product GetProductById(int id)
         {
-            return db.Products.Find(id);
+            return context.Products.Find(id);
         }
 
         public IEnumerable<Product> GetProductsByName(string name)
         {
             if (name == null)
-                return db.Products;
+                return context.Products;
 
-            var query = db.Products
+            var query = context.Products
                 .Where(p => p.Name.StartsWith(name))
                 .OrderBy(p => p.Name);
 

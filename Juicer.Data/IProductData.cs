@@ -8,7 +8,7 @@ namespace Juicer.Data
         IEnumerable<Product> GetProductsByName(string name);
 
         Product GetProductById(int id);
-
+        
         Product Update(Product updatedProduct);
 
         Product Add(Product newProduct);

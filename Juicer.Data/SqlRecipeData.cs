@@ -1,5 +1,7 @@
-﻿using Juicer.Juicer.Core;
+﻿using AutoMapper;
+using Juicer.Juicer.Core;
 using Juicer.Juicer.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,47 +12,54 @@ namespace Juicer.JuicerData
 {
     public class SqlRecipeData : IRecipeData
     {
-        private readonly JuicerDbContext db;
+        private readonly JuicerDbContext context;
 
-        public SqlRecipeData(JuicerDbContext db)
+        public SqlRecipeData(JuicerDbContext context)
         {
-            this.db = db;
+            this.context = context;
         }
 
 
         public Recipe Add(Recipe newRecipe)
         {
-            db.Recipes.Add(newRecipe);
+            context.Recipes.Add(newRecipe);
             return newRecipe;
         }
 
         public int Commit()
         {
-            return db.SaveChanges();
+            return context.SaveChanges();
         }
 
         public Recipe Delete(int id)
         {
             var recipe = GetRecipeById(id);
             if (recipe != null)
-                db.Recipes.Remove(recipe);
+                context.Recipes.Remove(recipe);
             return recipe;
         }
 
         public Recipe GetRecipeById(int id)
         {
-            return db.Recipes.Find(id);
+            return context.Recipes
+                .Include(r => r.Ingredients)
+                .ThenInclude(i => i.Product)
+                .SingleOrDefault(r => r.Id == id);
         }
 
-        public IEnumerable<Recipe> GetRecipesByName(string name)
+        public IEnumerable<Recipe> GetRecipesByName(string name = null)
         {
-            if (name == null)
-                return db.Recipes;
+            var recipes = context.Recipes
+                    .Include(r => r.Ingredients)
+                    .ThenInclude(i => i.Product);
 
-            var query = db.Recipes
+            if (name == null)
+                return recipes.ToList();
+
+            return recipes
                 .Where(r => r.Name.StartsWith(name))
-                .OrderBy(r => r.Name);
-            return query;
+                .OrderBy(r => r.Name)
+                .ToList();
         }
 
         public Recipe Update(Recipe updatedRecipe)
