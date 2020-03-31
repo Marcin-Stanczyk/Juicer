@@ -36,9 +36,11 @@ namespace Juicer
             });
 
             services.AddScoped<IJuicerRepository, JuicerRepository>();
+            services.AddScoped<IRecipeData, SqlRecipeData>();
+            services.AddScoped<IProductData, SqlProductData>();
 
             services.AddRazorPages();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

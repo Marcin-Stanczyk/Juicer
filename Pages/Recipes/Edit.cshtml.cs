@@ -48,29 +48,5 @@ namespace Juicer.Pages.Recipes
 
             return Page();
         }
-
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                Units = htmlHelper.GetEnumSelectList<UnitType>();
-                Products = new SelectList(productData.GetProductsByName(null).Select(p => p.Name));
-                return Page();
-            }
-
-            if (Recipe.Id > 0)
-            {
-                recipeData.Update(Recipe);
-                TempData["Message"] = $"Recipe {Recipe.Name} updated!";
-            }
-            else
-            {
-                recipeData.Add(Recipe);
-                TempData["Message"] = $"Recipe {Recipe.Name} added!";
-            }
-
-            recipeData.Commit();
-            return RedirectToPage("./List");
-        }
     }
 }

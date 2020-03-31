@@ -34,29 +34,33 @@ else
 
                 <div class="form-group">
                     <label asp-for="Recipe.Instructions"></label>
-                    <textarea wrap="hard" rows="5" asp-for="Recipe.Instructions" class="form-control"></textarea>
+                    <input asp-for="Recipe.Instructions" class="form-control" />
+                    <button id="addInstruction" class="btn btn-primary">+</button>
                 </div>
 
-                <div class="form-inline" id="Ingredients">
-                    <table>
-                        <tr>
-                            <td>
-                                <label asp-for="Recipe.Ingredients[0].Product"></label>
-                                <select asp-for="Recipe.Ingredients[0].Product" asp-items="Model.Products" class="form-control"></select>
-                            </td>
-                            <td>
-                                <label asp-for="Recipe.Ingredients[0].Amount"></label>
-                                <input asp-for="Recipe.Ingredients[0].Amount" class="form-control" />
-                            </td>
-                            <td>
-                                <label asp-for="Recipe.Ingredients[0].Unit"></label>
-                                <select asp-for="Recipe.Ingredients[0].Unit" asp-items="Model.Units" class="form-control"></select>
-                            </td>
-                            <td>
-                                <button id="addIngredient" class="btn btn-primary">+</button>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="form-group">
+                    <label>Ingredients</label>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Product</label>
+                            <select id="products" class="form-control" asp-items="Model.Products">
+                                <option value="" disabled selected></option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Amount</label>
+                            <input type="number" id="amount" value="" class="form-control inlined" />
+                        </div>
+                        <div class="col-md-3">
+                            <label>Unit</label>
+                            <select id="units" class="form-control inlined" asp-items="Model.Units">
+                                <option value="" selected></option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button id="addIngredient" class="btn btn-primary">+</button>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -70,6 +74,23 @@ else
             <p id="descriptionView"></p>
             <ol id="instructionsView"></ol>
             <ul id="ingredientsView"></ul>
+
+            @*@if (Model.Recipe.Id > 0)
+            {
+                <h3 id="nameView">@Model.Recipe.Name</h3>
+                <p id= ="descriptionView">@Model.Recipe.Description</p>
+                <ul id="ingredientsView">
+                    @foreach (var ingredient in Model.Recipe.Ingredients)
+                    {
+                        <li class="list-group-item">@ingredient.Product.Name @ingredient.Amount @ingredient.Unit</li>
+                    }
+                </ul>
+
+            }
+            else
+            {
+
+            }*@
         </div>
     </div>
 </div>

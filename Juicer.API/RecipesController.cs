@@ -43,7 +43,7 @@ namespace Juicer.Juicer.API
         }
 
         [HttpPost]
-        public async Task<ActionResult<RecipeDto>> Post(RecipeDto recipeDto)
+        public async Task<ActionResult<RecipeDto>> Post([FromBody] RecipeDto recipeDto)
         {
             var existingRecipes = await repository.GetAllRecipesAsync();
             var isNameTaken = existingRecipes.Any(r => r.Name == recipeDto.Name);
@@ -57,13 +57,13 @@ namespace Juicer.Juicer.API
 
             for (int i=0; i<recipeDto.Ingredients.Count; i++)
             {
-                var currentProductId = recipeDto.Ingredients[i].ProductId;
-                var currentProduct = products.FirstOrDefault(p => p.Id == currentProductId);
+                var currentProductName = recipeDto.Ingredients[i].ProductName;
+                var currentProduct = products.Where(p => p.Name == currentProductName).FirstOrDefault();
 
                 if (currentProduct != null)
                     newRecipe.Ingredients[i].Product = currentProduct;
                 else
-                    return BadRequest($"There is no product with id {currentProductId}.");
+                    return BadRequest($"There is no product with name {currentProductName}.");
             }
 
             repository.Add(newRecipe);
@@ -88,13 +88,13 @@ namespace Juicer.Juicer.API
 
             for (int i = 0; i < recipeDto.Ingredients.Count; i++)
             {
-                var currentProductId = recipeDto.Ingredients[i].ProductId;
-                var currentProduct = products.FirstOrDefault(p => p.Id == currentProductId);
+                var currentProductName = recipeDto.Ingredients[i].ProductName;
+                var currentProduct = products.FirstOrDefault(p => p.Name == currentProductName);
 
                 if (currentProduct != null)
                     recipeInDb.Ingredients[i].Product = currentProduct;
                 else
-                    return BadRequest($"There is no product with id {currentProductId}.");
+                    return BadRequest($"There is no product with name {currentProductName}.");
             }
 
             mapper.Map(recipeDto, recipeInDb);
