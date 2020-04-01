@@ -55,7 +55,7 @@ namespace Juicer.Juicer.API
 
             var products = await repository.GetAllProductsAsync();
 
-            for (int i=0; i<recipeDto.Ingredients.Count; i++)
+            for (int i = 0; i < recipeDto.Ingredients.Length; i++)
             {
                 var currentProductName = recipeDto.Ingredients[i].ProductName;
                 var currentProduct = products.Where(p => p.Name == currentProductName).FirstOrDefault();
@@ -76,28 +76,27 @@ namespace Juicer.Juicer.API
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<RecipeDto>> Update(int id, RecipeDto recipeDto)
+        public async Task<ActionResult<RecipeDto>> Update(int id,[FromBody] RecipeDto recipeDto)
         {
             var recipeInDb = await repository.GetRecipeAsync(id);
 
             if (recipeInDb == null)
                 return NotFound($"Could not find recipe with id: {id}.");
 
+            mapper.Map(recipeDto, recipeInDb);
 
             var products = await repository.GetAllProductsAsync();
 
-            for (int i = 0; i < recipeDto.Ingredients.Count; i++)
+            for (int i = 0; i < recipeDto.Ingredients.Length; i++)
             {
-                var currentProductName = recipeDto.Ingredients[i].ProductName;
-                var currentProduct = products.FirstOrDefault(p => p.Name == currentProductName);
+                    var currentProductName = recipeDto.Ingredients[i].ProductName;
+                    var currentProduct = products.Where(p => p.Name == currentProductName).FirstOrDefault();
 
-                if (currentProduct != null)
-                    recipeInDb.Ingredients[i].Product = currentProduct;
-                else
-                    return BadRequest($"There is no product with name {currentProductName}.");
+                    if (currentProduct != null)
+                        recipeInDb.Ingredients[i].Product = currentProduct;
+                    else
+                        return BadRequest($"There is no product with name {currentProductName}.");
             }
-
-            mapper.Map(recipeDto, recipeInDb);
 
             if (await repository.SaveChangesAsync())
                 return Ok(mapper.Map<RecipeDto>(recipeInDb));

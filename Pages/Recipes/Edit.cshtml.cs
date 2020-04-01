@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Juicer.Core;
 using Juicer.Data;
 using Juicer.Juicer.Core;
 using Juicer.Juicer.Data;
+using Juicer.Juicer.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,19 +19,21 @@ namespace Juicer.Pages.Recipes
         private readonly IRecipeData recipeData;
         private readonly IHtmlHelper htmlHelper;
         private readonly IProductData productData;
+        private readonly IMapper mapper;
 
         [BindProperty]
-        public Recipe Recipe { get; set; }
+        public RecipeDto RecipeDto { get; set; }
 
         public IEnumerable<SelectListItem> Units { get; set; }
 
         public IEnumerable<SelectListItem> Products { get; set; }
 
-        public EditModel(IRecipeData recipeData, IHtmlHelper htmlHelper, IProductData productData)
+        public EditModel(IRecipeData recipeData, IHtmlHelper htmlHelper, IProductData productData, IMapper mapper)
         {
             this.recipeData = recipeData;
             this.htmlHelper = htmlHelper;
             this.productData = productData;
+            this.mapper = mapper;
         }
 
         public IActionResult OnGet(int? recipeId)
@@ -39,11 +43,11 @@ namespace Juicer.Pages.Recipes
             Products = new SelectList(productData.GetProductsByName(null).Select(p => p.Name));
 
             if (recipeId.HasValue)
-                Recipe = recipeData.GetRecipeById(recipeId.Value);
+                RecipeDto = mapper.Map<RecipeDto>(recipeData.GetRecipeById(recipeId.Value));
             else
-                Recipe = new Recipe();
+                RecipeDto = new RecipeDto();
 
-            if (Recipe == null)
+            if (RecipeDto == null)
                 return RedirectToPage("./NotFound");
 
             return Page();

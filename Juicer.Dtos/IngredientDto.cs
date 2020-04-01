@@ -1,4 +1,5 @@
-﻿using Juicer.Juicer.Core;
+﻿using Juicer.Core;
+using Juicer.Juicer.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace Juicer.Juicer.Dtos
 
         public float Amount { get; set; }
 
-        public UnitType Unit { get; set; }
+        public string Unit { get; set; }
     }
 }

@@ -7,31 +7,71 @@
 
     // -----------------------------------------------
 
-    var recipeDto = {
-        "instructions": "",
-        "ingredients": []
-    };
+    var recipeDto;
+
+    if ($("#RecipeDto_Id").val() > 0) {
+        $.ajax({
+            url: "/api/recipes/" + $("#RecipeDto_Id").val(),
+            success: function (response) {
+                recipeDto = response;
+
+                $("#nameView").text(recipeDto.name);
+                $("#descriptionView").text(recipeDto.description);
+                $(recipeDto.instructions).each(function (index, element) {
+                    debugger
+                    $("#instructionsView").append("<li>"
+                        + element
+                        + "<button class='remove btn btn-sm btn-danger'>X</button>"
+                        + "</li>");
+
+                    $(".remove").on("click", function () {
+                        $(this).parent().remove();
+                    });
+                });
+                $(recipeDto.ingredients).each(function (index, element) {
+                    $("#ingredientsView").append(
+                        "<tr>"
+                        + "<td class='product'>"
+                        + element.productName
+                        + "</td><td class='amount text-right'>"
+                        + element.amount
+                        + "</td><td class='unit text-right'>"
+                        + element.unit
+                        + "</td>"
+                        + "<td><button class='removeIngredient btn btn-sm btn-danger'>X</button></td>"
+                        + "</tr>");
+
+                    $(".removeIngredient").on("click", function () {
+                        $(this).closest("tr").remove();
+                    });
+                });
+            }
+        });
+
+        
+    } else {
+        recipeDto = {
+            "instructions": [],
+            "ingredients": []
+        };
+    }
 
 
     // Name
-    $("#Recipe_Name").keyup(function () {
+    $("#RecipeDto_Name").keyup(function () {
         // 1) Get input
         let nameValue = $(this).val();
         // 2) Show preview
         $("#nameView").text(nameValue);
-        // 3) Pass to DTO
-        recipeDto.name = nameValue;
     });
 
 
     // Description
-    $("#Recipe_Description").keyup(function () {
+    $("#RecipeDto_Description").keyup(function () {
         // 1) Get input
-        var descriptionValue = $(this).val();
+        let descriptionValue = $(this).val();
         // 2) Show preview
         $("#descriptionView").text(descriptionValue);
-        // 3) Pass to DTO
-        recipeDto.description = descriptionValue;
     });
 
 
@@ -39,20 +79,19 @@
     $("#addInstruction").on("click", function () {
         event.preventDefault();
         // 1) Get input
-        let input = $("#Recipe_Instructions").val();
+        let input = $("#RecipeDto_Instructions").val();
         // 2) Show preview
         if ($.trim(input) != '') {
             $("#instructionsView").append("<li>"
                 + input
                 + "<button class='remove btn btn-sm btn-danger'>X</button>"
                 + "</li>");
-            $("#Recipe_Instructions").val("");
 
             $(".remove").on("click", function () {
                 $(this).parent().remove();
             });
         }
-        // 3) Will be passed to DTO just before sending to DB
+        $("#RecipeDto_Instructions").val("");
     });
 
 
@@ -63,24 +102,26 @@
         // 1) Get input
         let product = $("#products option:selected").val();
         let amount = $("#amount").val();
-        let unit = $("#units option:selected").val();
+        let unit = $("#units option:selected").text();
 
         // 2) Show preview
-        $("#ingredientsView").append("<li class='list-group-item'>"
-            + $("#products option:selected").text()
-            + " "
-            + $("#amount").val()
-            + " "
-            + $("#units option:selected").text()
-            + " </li>");
+        $("#ingredientsView").append(
+            "<tr>"
+            + "<td class='product'>"
+            + product
+            + "</td><td class='amount text-right'>"
+            + amount
+            + "</td><td class='unit text-right'>"
+            + unit
+            + "</td>"
+            + "<td><button class='removeIngredient btn btn-sm btn-danger'>X</button></td>"
+            + "</tr>");
 
-        // 3) Pass to DTO
-        let newIngredient = {
-            "productName": product,
-            "amount": amount,
-            "unit": unit
-        };
-        recipeDto.ingredients.push(newIngredient);
+
+        $(".removeIngredient").on("click", function () {
+            $(this).closest("tr").remove();
+        });
+
 
         // Restart the input fields
         $("#products").val("");
@@ -92,30 +133,59 @@
     // ------------------------------------------------------------
 
 
-    // Post RecipeDto to DB
+    // POST or PUT RecipeDto to DB
     $("#submitBtn").on("click", function () {
         event.preventDefault();
 
-        // Pass instructions to DTO from instructions preview
+        recipeDto.name = $("#nameView").text();
+        recipeDto.description = $("#descriptionView").text();
+
+        recipeDto.instructions = [];
         $("#instructionsView li").each(function () {
-            recipeDto.instructions += $(this).text();
+            let element = $(this).text();
+            recipeDto.instructions.push(element);
         });
 
+        recipeDto.ingredients = [];
+        $("#ingredientsView tr").each(function () {
 
-        $.ajax({
-            type: "post",
-            url: "/api/recipes",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(recipeDto),
-            success: function (result) {
-                console.log('Data received: ');
-                console.log(result);
-            },
-            error: function (request, status, error) {
-                // If Recipe.Name is taken there will be 400 Bad Request response "Name already taken"
-                alert(request.responseText);
-            }
+            let newIngredient = {
+                "productName": $(this).find($(".product")).text(),
+                "amount": $(this).find($(".amount")).text(),
+                "unit": $(this).find($(".unit")).text()
+            };
+            recipeDto.ingredients.push(newIngredient);
+
         });
+
+        
+
+
+
+        if ($("#RecipeDto_Id").val() > 0) {
+            $.ajax({
+                type: "PUT",
+                url: "/api/recipes/" + $("#RecipeDto_Id").val(),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(recipeDto),
+                success: function () {
+                    location.href = "../List";
+                }
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/api/recipes",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(recipeDto),
+                success: function () {
+                    location.href = "./List";
+                }
+            });
+        }
+
+        
     });
 });

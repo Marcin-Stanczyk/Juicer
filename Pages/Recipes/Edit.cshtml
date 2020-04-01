@@ -1,12 +1,12 @@
 ﻿@page "{recipeId:int?}"
 @model Juicer.Pages.Recipes.EditModel
 @{
-    ViewData["Title"] = $"Edit {Model.Recipe.Name}";
+    ViewData["Title"] = $"Edit {Model.RecipeDto.Name}";
 }
 
-@if (Model.Recipe.Id > 0)
+@if (Model.RecipeDto.Id > 0)
 {
-    <h2>Editing @Model.Recipe.Name</h2>
+    <h2>Editing @Model.RecipeDto.Name</h2>
 }
 else
 {
@@ -19,22 +19,22 @@ else
         <div class="col-md-6">
 
             <form method="post" id="newRecipe">
-                <input type="hidden" asp-for="Recipe.Id" />
+                <input type="hidden" asp-for="RecipeDto.Id" />
 
                 <div class="form-group">
-                    <label asp-for="Recipe.Name"></label>
-                    <input asp-for="Recipe.Name" class="form-control" />
-                    <span class="text-danger" asp-validation-for="Recipe.Name"></span>
+                    <label asp-for="RecipeDto.Name"></label>
+                    <input asp-for="RecipeDto.Name" class="form-control" />
+                    <span class="text-danger" asp-validation-for="RecipeDto.Name"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Recipe.Description"></label>
-                    <input asp-for="Recipe.Description" class="form-control" />
+                    <label asp-for="RecipeDto.Description"></label>
+                    <input asp-for="RecipeDto.Description" class="form-control" />
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Recipe.Instructions"></label>
-                    <input asp-for="Recipe.Instructions" class="form-control" />
+                    <label>Instructions</label>
+                    <input id="RecipeDto_Instructions" class="form-control" />
                     <button id="addInstruction" class="btn btn-primary">+</button>
                 </div>
 
@@ -54,7 +54,7 @@ else
                         <div class="col-md-3">
                             <label>Unit</label>
                             <select id="units" class="form-control inlined" asp-items="Model.Units">
-                                <option value="" selected></option>
+                                <option value="" disabled selected></option>
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -62,7 +62,6 @@ else
                         </div>
                     </div>
                 </div>
-
 
                 <button type="submit" id="submitBtn" class="btn btn-primary">Save</button>
                 <a asp-page="./List" class="btn btn-secondary">Cancel</a>
@@ -73,24 +72,12 @@ else
             <h3 id="nameView"></h3>
             <p id="descriptionView"></p>
             <ol id="instructionsView"></ol>
-            <ul id="ingredientsView"></ul>
-
-            @*@if (Model.Recipe.Id > 0)
-            {
-                <h3 id="nameView">@Model.Recipe.Name</h3>
-                <p id= ="descriptionView">@Model.Recipe.Description</p>
-                <ul id="ingredientsView">
-                    @foreach (var ingredient in Model.Recipe.Ingredients)
-                    {
-                        <li class="list-group-item">@ingredient.Product.Name @ingredient.Amount @ingredient.Unit</li>
-                    }
-                </ul>
-
-            }
-            else
-            {
-
-            }*@
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody id="ingredientsView">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

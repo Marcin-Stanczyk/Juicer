@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Juicer.Core;
+using Juicer.Data;
 using Juicer.Juicer.Core;
 using Juicer.Juicer.Dtos;
 using System;
@@ -14,15 +15,23 @@ namespace Juicer.MappingProfiles
     {
         public RecipeProfile()
         {
-            this.CreateMap<Recipe, RecipeDto>();
-            this.CreateMap<RecipeDto, Recipe>();
+            this.CreateMap<Recipe, RecipeDto>()
+                .AfterMap((recipe, recipeDto) => 
+                recipeDto.Instructions = recipe.Instructions.Split('X', StringSplitOptions.RemoveEmptyEntries));
 
-            this.CreateMap<Ingredient, IngredientDto>();
+            this.CreateMap<RecipeDto, Recipe>()
+                .AfterMap((recipeDto, recipe) => 
+                recipe.Instructions = string.Concat(recipeDto.Instructions));
+
+
+            this.CreateMap<Ingredient, IngredientDto>()
+                .AfterMap((ingredient, ingredientDto) => 
+                ingredientDto.Unit = Enum.GetName(typeof(UnitType), ingredient.Unit));
+
             this.CreateMap<IngredientDto, Ingredient>()
-                .ForMember(i => i.Product, opt => opt.Ignore());
-
-            this.CreateMap<Product, ProductDto>();
-            this.CreateMap<ProductDto, Product>();
+                .ForMember(i => i.Product, o => o.Ignore())
+                .AfterMap((ingredientDto, ingredient) =>
+                ingredient.Unit = Enum.Parse<UnitType>(ingredientDto.Unit));
         }
     }
 }
