@@ -4,59 +4,44 @@
     ViewData["Title"] = "Recipes";
 }
 
-<h2>Recipes</h2>
-<a asp-page="./Edit" class="btn btn-primary">New Recipe</a>
+<h1 class="text-center">Recipes</h1>
+
 
 <form method="get">
-    <div class="form-group">
+    <div class="btn-toolbar justify-content-between">
+        <div class="btn-group">
+            <a asp-page="./Edit" class="btn btn-primary">New Recipe</a>
+        </div>
         <div class="input-group">
-            <input type="search" class="form-control" asp-for="SearchTerm" />
+            <input type="search" class="form-control" placeholder="Search:" asp-for="SearchTerm" />
             <div class="input-group-append">
-                <button class="btn btn-lg">
+                <button class="btn">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-
         </div>
     </div>
-
 </form>
 
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="d-flex flex-row flex-wrap">
+            @foreach (var recipe in Model.Recipes)
+            {
 
-<table class="table">
-    @foreach (var recipe in Model.Recipes)
-    {
-        <tr>
-            <td><img src=@Url.Content(recipe.PhotoPath) class="img-fluid"/></td>
-            <td>@recipe.Name</td>
-            <td>@recipe.Description</td>
-            <td>
-                <ul>
-                    @foreach (var ingredient in recipe.Ingredients)
-                    {
-                    <li>@ingredient.Product.Name @ingredient.Amount @ingredient.Unit</li>
-                    }
-                </ul>
-            </td>
-            <td>
-                <a class="btn"
-                   asp-page="./Details"
-                   asp-route-recipeId="@recipe.Id">
-                    <i class="fas fa-search-plus"></i>
-                </a>
-                <a class="btn"
-                   asp-page="./Edit"
-                   asp-route-recipeId="@recipe.Id">
-                    <i class="far fa-edit"></i>
-                </a>
-                <a class="btn"
-                   asp-page="./Delete"
-                   asp-route-recipeId="@recipe.Id">
-                    <i class="far fa-trash-alt"></i>
-                </a>
-            </td>
+                <div class="col-md-4 p-2">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" data-src=@Url.Content(recipe.PhotoPath) alt="@recipe.Name" style="height: 225px; width: 100%; display: block;" src=@Url.Content(recipe.PhotoPath) data-holder-rendered="true">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-text">@recipe.Name</h5>
+                                <a class="btn btn-sm btn-outline-secondary" asp-page="./Details" asp-route-recipeId="@recipe.Id">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        </tr>
-    }
-</table>
-
+            }
+        </div>
+    </div>
+</div>

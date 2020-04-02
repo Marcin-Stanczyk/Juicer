@@ -29,7 +29,7 @@ else
 
                 <div class="form-group">
                     <label asp-for="RecipeDto.Description"></label>
-                    <input asp-for="RecipeDto.Description" class="form-control" />
+                    <textarea asp-for="RecipeDto.Description" class="form-control"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -64,7 +64,7 @@ else
                 </div>
 
                 <button type="submit" id="submitBtn" class="btn btn-primary">Save</button>
-                <a asp-page="./List" class="btn btn-secondary">Cancel</a>
+                <a href="javascript: history.go(-1)" class="btn btn-secondary">Cancel</a>
             </form>
 
         </div>

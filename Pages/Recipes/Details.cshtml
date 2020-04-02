@@ -1,7 +1,7 @@
 ﻿@page "{recipeId:int}"
 @model Juicer.Pages.Recipes.DetailsModel
 @{
-    ViewData["Title"] = Model.Recipe.Name;
+    ViewData["Title"] = Model.RecipeDto.Name;
 }
 
 @if (Model.Message != null)
@@ -9,12 +9,34 @@
     <div class="alert alert-info">@Model.Message</div>
 }
 
-<h2>@Model.Recipe.Name</h2>
+<h2>
+    @Model.RecipeDto.Name <a class="btn" asp-page="./Edit" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-edit"></i></a>
+    <a class="btn" asp-page="./Delete" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-trash-alt"></i></a>
+</h2>
 
 
 <div>
-    Id: @Model.Recipe.Id <br />
-    Name: @Model.Recipe.Name <br />
-    Description: @Model.Recipe.Description <br />
-    Instructions: @Model.Recipe.Instructions <br />
+    <p>
+        @Model.RecipeDto.Description
+    </p>
+    <h6>Ingredients:</h6>
+    <ul>
+        @foreach (var ingredient in Model.RecipeDto.Ingredients)
+        {
+            <li>@ingredient.ProductName @ingredient.Amount @ingredient.Unit</li>
+        }
+    </ul>
+
+    @if (Model.RecipeDto.Instructions.Length > 0)
+    {
+        <h6>Instructions:</h6>
+        <ol>
+            @foreach (var instruction in Model.RecipeDto.Instructions)
+            {
+                <li>@instruction</li>
+            }
+        </ol>
+    }
+
+    <a asp-page="./List" class="btn btn-dark">All Recipes</a>
 </div>

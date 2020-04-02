@@ -45,6 +45,25 @@
         </a>
     </div>
 
-    <div>
-        <h2>Work in progress</h2>
-    </div>
+@*---------------------------------------------------------------------------*@
+
+<h3>Recent Recipes</h3>
+<div class="card-deck">
+    @for (int i = 0; i < @Model.Recipes.Length; i++)
+    {
+        <div class="col-md-4 p-2">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src=@Url.Content(Model.Recipes[i].PhotoPath) alt="@Model.Recipes[i].Name" style="height: 225px; width: 100%; display: block;" src=@Url.Content(Model.Recipes[i].PhotoPath) data-holder-rendered="true">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">@Model.Recipes[i].Name</h5>
+                        <a class="btn btn-sm btn-outline-success" asp-page="Recipes/Details" asp-route-recipeId="@Model.Recipes[i].Id">View</a>
+                    </div>
+                    <div>
+                        <p class="card-text text-truncate">@Model.Recipes[i].Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

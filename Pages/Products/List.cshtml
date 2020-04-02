@@ -10,23 +10,40 @@
 }
 
 
-<h1>Products</h1>
-<a asp-page="./Edit" class="btn btn-primary">New Product</a>
+<h1 class="text-center">Products</h1>
+
 
 <form method="get">
-    <div class="form-group">
+    <div class="btn-toolbar justify-content-between">
+        <div class="btn-group">
+            <a asp-page="./Edit" class="btn btn-primary">New Product</a>
+        </div>
         <div class="input-group">
-            <input type="search" class="form-control" asp-for="SearchTerm" />
+            <input type="search" class="form-control" placeholder="Search:" asp-for="SearchTerm" />
             <div class="input-group-append">
-                <button class="btn btn-lg">
+                <button class="btn">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-
         </div>
     </div>
-
 </form>
+
+
+@*<div class="card-group">
+        @foreach (var product in Model.Products)
+        {
+
+            <div class="card bg-dark text-white">
+                <img class="card-img-top" src=@Url.Content(product.PhotoPath) alt="@product.Name">
+                <div class="card-img-overlay">
+                    <h5 class="card-title">@product.Name</h5>
+                </div>
+            </div>
+
+        }
+</div>*@
+
 
 
 <table class="table">
@@ -56,4 +73,3 @@
         </tr>
     }
 </table>
-
