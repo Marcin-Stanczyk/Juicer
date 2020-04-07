@@ -18,10 +18,9 @@
                 $("#nameView").text(recipeDto.name);
                 $("#descriptionView").text(recipeDto.description);
                 $(recipeDto.instructions).each(function (index, element) {
-                    debugger
                     $("#instructionsView").append("<li>"
                         + element
-                        + "<button class='remove btn btn-sm btn-danger'>X</button>"
+                        + "<button class='remove btn btn-outline-danger btn-sm'>X</button>"
                         + "</li>");
 
                     $(".remove").on("click", function () {
@@ -84,7 +83,7 @@
         if ($.trim(input) != '') {
             $("#instructionsView").append("<li>"
                 + input
-                + "<button class='remove btn btn-sm btn-danger'>X</button>"
+                + "<button class='remove btn btn-outline-danger btn-sm'>X</button>"
                 + "</li>");
 
             $(".remove").on("click", function () {

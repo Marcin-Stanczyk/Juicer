@@ -8,13 +8,28 @@
 {
     <div class="alert alert-info">@Model.Message</div>
 }
-    <h2>@Model.Product.Name</h2>
 
-<div>
-    Id: @Model.Product.Id
-</div>
-<div>
-    Category: @Model.Product.Category
-</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <a asp-page="./List"><< all products</a>
+            <h2>@Model.Product.Name</h2>
+            <div>
+                <p>Category: @Model.Product.Category</p>
 
-<a asp-page="./List" class="btn btn-primary">All Products</a>
+                @if (Model.Product.PhotoPath != null)
+                {
+                    <img src="@Model.Product.PhotoPath" class="img-fluid" alt="@Model.Product.Name" />
+                }
+                
+                <hr />
+
+                <div class="btn-group-sm">
+                    <a class="btn btn-outline-dark" asp-page="./Edit" asp-route-productId="@Model.Product.Id"><i class="far fa-edit"></i> Edit Product</a>
+                    <a class="btn btn-outline-dark" asp-page="./Image" asp-route-productId="@Model.Product.Id"><i class="far fa-image"></i> Add/Change Photo</a>
+                    <a class="btn btn-outline-dark" asp-page="./Delete" asp-route-productId="@Model.Product.Id"><i class="far fa-trash-alt"></i> Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

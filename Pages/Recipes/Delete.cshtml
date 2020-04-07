@@ -4,13 +4,20 @@
     ViewData["Title"] = $"Delete {Model.Recipe.Name}";
 }
 
-<h2>Delete</h2>
-
-<div class="alert alert-danger">
-    Are you sure you want to delete @Model.Recipe.Name?
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="alert alert-danger">
+                Are you sure you want to delete <a asp-page="./Details" asp-route-recipeId="@Model.Recipe.Id" class="alert-link">@Model.Recipe.Name</a> recipe?
 </div>
-<form method="post">
-    <button type="submit" class="btn btn-danger">Yes!</button>
-    <a href="javascript: history.go(-1)" class="btn btn-default">Cancel</a>
-</form>
+            <form method="post">
+                <div class="btn-group-sm">
+                    <button type="submit" class="btn btn-danger">Delete!</button>
+                    <a href="javascript: history.go(-1)" class="btn btn-outline-dark">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 

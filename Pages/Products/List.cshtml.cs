@@ -15,6 +15,8 @@ namespace Juicer.Pages.Products
 
         public IEnumerable<Product> Products { get; set; }
 
+        private CategoryType Categories { get; set; }
+
         [TempData]
         public string Message { get; set; }
 

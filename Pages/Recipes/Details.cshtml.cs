@@ -18,9 +18,6 @@ namespace Juicer.Pages.Recipes
 
         public RecipeDto RecipeDto { get; set; }
 
-        [TempData]
-        public string Message { get; set; }
-
         public DetailsModel(IRecipeData recipeData, IMapper mapper)
         {
             this.recipeData = recipeData;

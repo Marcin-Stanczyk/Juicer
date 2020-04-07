@@ -4,44 +4,49 @@
     ViewData["Title"] = "Recipes";
 }
 
-<h1 class="text-center">Recipes</h1>
+<div class="container">
 
 
-<form method="get">
-    <div class="btn-toolbar justify-content-between">
-        <div class="btn-group">
-            <a asp-page="./Edit" class="btn btn-primary">New Recipe</a>
-        </div>
-        <div class="input-group">
-            <input type="search" class="form-control" placeholder="Search:" asp-for="SearchTerm" />
-            <div class="input-group-append">
-                <button class="btn">
-                    <i class="fas fa-search"></i>
-                </button>
+    <h1 class="text-center display-4">Recipes</h1>
+
+
+    <form method="get">
+        <div class="btn-toolbar justify-content-between">
+            <div class="btn-group">
+                <a asp-page="./Edit" class="btn btn-primary">New Recipe</a>
+            </div>
+            <div class="input-group">
+                <input type="search" class="form-control" placeholder="Search:" asp-for="SearchTerm" />
+                <div class="input-group-append">
+                    <button class="btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="d-flex flex-row flex-wrap">
-            @foreach (var recipe in Model.Recipes)
-            {
+    <hr />
 
-                <div class="col-md-4 p-2">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" data-src=@Url.Content(recipe.PhotoPath) alt="@recipe.Name" style="height: 225px; width: 100%; display: block;" src=@Url.Content(recipe.PhotoPath) data-holder-rendered="true">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-text">@recipe.Name</h5>
-                                <a class="btn btn-sm btn-outline-secondary" asp-page="./Details" asp-route-recipeId="@recipe.Id">View</a>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="d-flex flex-row flex-wrap">
+                @foreach (var recipe in Model.Recipes)
+                {
+                    <div class="col-md-4 p-2">
+                        <div class="card mb-4 box-shadow">
+                            <a asp-page="./Details" asp-route-recipeId="@recipe.Id"><img class="card-img-top img-cover img-nohover" data-src="@recipe.PhotoPath" alt="@recipe.Name" style="height: 225px; width: 100%; display: block;" src="@recipe.PhotoPath" data-holder-rendered="true"></a>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-text">@recipe.Name</h5>
+                                    <a class="btn btn-sm btn-outline-dark" asp-page="./Details" asp-route-recipeId="@recipe.Id">View</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            }
+                }
+            </div>
         </div>
     </div>
 </div>

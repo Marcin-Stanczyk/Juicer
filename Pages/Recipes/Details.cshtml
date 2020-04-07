@@ -4,39 +4,48 @@
     ViewData["Title"] = Model.RecipeDto.Name;
 }
 
-@if (Model.Message != null)
-{
-    <div class="alert alert-info">@Model.Message</div>
-}
 
-<h2>
-    @Model.RecipeDto.Name <a class="btn" asp-page="./Edit" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-edit"></i></a>
-    <a class="btn" asp-page="./Delete" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-trash-alt"></i></a>
-</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <a asp-page="./List"><< all recipes</a>
+            <h2>@Model.RecipeDto.Name</h2>
+            <div>
+                <p>
+                    @Model.RecipeDto.Description
+                </p>
+                <h6>Ingredients:</h6>
+                <ul>
+                    @foreach (var ingredient in Model.RecipeDto.Ingredients)
+                    {
+                        <li>@ingredient.ProductName @ingredient.Amount @ingredient.Unit</li>
+                    }
+                </ul>
 
-
-<div>
-    <p>
-        @Model.RecipeDto.Description
-    </p>
-    <h6>Ingredients:</h6>
-    <ul>
-        @foreach (var ingredient in Model.RecipeDto.Ingredients)
-        {
-            <li>@ingredient.ProductName @ingredient.Amount @ingredient.Unit</li>
-        }
-    </ul>
-
-    @if (Model.RecipeDto.Instructions.Length > 0)
-    {
-        <h6>Instructions:</h6>
-        <ol>
-            @foreach (var instruction in Model.RecipeDto.Instructions)
+                @if (Model.RecipeDto.Instructions.Length > 0)
+                {
+                    <h6>Instructions:</h6>
+                    <ol>
+                        @foreach (var instruction in Model.RecipeDto.Instructions)
+                        {
+                            <li>@instruction</li>
+                        }
+                    </ol>
+                }
+                <hr />
+                <div class="btn-group-sm">
+                    <a class="btn btn-outline-dark" asp-page="./Edit" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-edit"></i> Edit Recipe</a>
+                    <a class="btn btn-outline-dark" asp-page="./Image" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-image"></i> Add/Change Photo</a>
+                    <a class="btn btn-outline-dark" asp-page="./Delete" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-trash-alt"></i> Delete</a>
+                </div>
+                <hr />
+            </div>
+        </div>
+        <div class="col-md-6">
+            @if (Model.RecipeDto.PhotoPath != null)
             {
-                <li>@instruction</li>
+                <img src="@Model.RecipeDto.PhotoPath" class="img-fluid" alt="@Model.RecipeDto.Name" />
             }
-        </ol>
-    }
-
-    <a asp-page="./List" class="btn btn-dark">All Recipes</a>
+        </div>
+    </div>
 </div>

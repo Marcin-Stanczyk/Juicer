@@ -1,0 +1,32 @@
+﻿@page "{productId:int}"
+@model Juicer.Pages.Products.ImageModel
+@{
+    ViewData["Title"] = Model.Product.Name;
+}
+
+<h2>Upload Product's Image</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h6 class="text-muted">Recipe: @Model.Product.Name</h6>
+            <div class="form-control">
+                <form method="post" enctype="multipart/form-data">
+                    <input type="file" class="form-control-file" name="image" />
+                    <hr />
+                    <div class="btn-group-sm">
+                        <button type="submit" class="btn btn-success" value="Upload!">Upload!</button>
+                        <a href="javascript: history.go(-1)" class="btn btn-outline-dark">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            @if (Model.Product.PhotoPath != null)
+            {
+                <img src="@Model.Product.PhotoPath" class="img-fluid" alt="@Model.Product.Name" />
+            }
+        </div>
+    </div>
+</div>

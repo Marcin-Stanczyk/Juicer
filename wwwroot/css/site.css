@@ -1,4 +1,17 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿.img-cover {
+    object-fit: cover;
+}
+
+.img-nohover {
+    opacity: 0.9;
+}
+
+.img-nohover:hover {
+    opacity: 1;
+}
+
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {

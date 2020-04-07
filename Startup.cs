@@ -6,6 +6,7 @@ using AutoMapper;
 using Juicer.Data;
 using Juicer.Juicer.Data;
 using Juicer.JuicerData;
+using Juicer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +39,7 @@ namespace Juicer
             services.AddScoped<IJuicerRepository, JuicerRepository>();
             services.AddScoped<IRecipeData, SqlRecipeData>();
             services.AddScoped<IProductData, SqlProductData>();
+            services.AddSingleton<ImageStore>();
 
             services.AddRazorPages();
             services.AddControllers().AddNewtonsoftJson();
