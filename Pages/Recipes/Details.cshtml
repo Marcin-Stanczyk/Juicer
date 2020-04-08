@@ -21,9 +21,11 @@
                             <div class="col-3 text-center">
                                 <h6>@ingredient.Amount @ingredient.Unit</h6>
                                 <a asp-page="../Products/Details" asp-route-productId="@Model.Products.SingleOrDefault(p => p.Name == ingredient.ProductName).Id">
-                                <img src="@Model.Products.SingleOrDefault(p => p.Name == ingredient.ProductName).PhotoPath" class="img-cover img-fluid" />
+                                    <img src="@Model.Products.SingleOrDefault(p => p.Name == ingredient.ProductName).PhotoPath" class="img-cover img-fluid" />
                                 </a>
-                                <p>@ingredient.ProductName</p>
+                                <a class="text-dark" asp-page="../Products/Details" asp-route-productId="@Model.Products.SingleOrDefault(p => p.Name == ingredient.ProductName).Id">
+                                    <p>@ingredient.ProductName</p>
+                                </a>
                             </div>
                         }
                     </div>

@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Juicer.Data\IProductData.cs" />
+    <Compile Remove="Juicer.Data\IRecipeData.cs" />
+    <Compile Remove="Juicer.Data\SqlProductData.cs" />
+    <Compile Remove="Juicer.Data\SqlRecipeData.cs" />
     <Compile Remove="Juicer.Dtos\ProductDto.cs" />
   </ItemGroup>
 

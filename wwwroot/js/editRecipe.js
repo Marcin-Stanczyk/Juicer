@@ -157,8 +157,6 @@
 
         });
 
-        
-
 
 
         if ($("#RecipeDto_Id").val() > 0) {
@@ -169,7 +167,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(recipeDto),
                 success: function () {
-                    location.href = "./Details/" + recipeDto.Id;
+                    location.href = "../Details/" + $("#RecipeDto_Id").val();
                 }
             });
         } else {
@@ -180,11 +178,12 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(recipeDto),
                 success: function () {
-                    location.href = "./List";
+                    location.href = "../List";
                 }
             });
         }
 
+        
         
     });
 });

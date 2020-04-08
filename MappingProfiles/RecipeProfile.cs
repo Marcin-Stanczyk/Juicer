@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Juicer.Core;
-using Juicer.Data;
 using Juicer.Juicer.Core;
 using Juicer.Juicer.Dtos;
 using System;

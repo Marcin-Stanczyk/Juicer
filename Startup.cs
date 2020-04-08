@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Juicer.Data;
 using Juicer.Juicer.Data;
-using Juicer.JuicerData;
 using Juicer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,8 +35,6 @@ namespace Juicer
             });
 
             services.AddScoped<IJuicerRepository, JuicerRepository>();
-            services.AddScoped<IRecipeData, SqlRecipeData>();
-            services.AddScoped<IProductData, SqlProductData>();
             services.AddSingleton<ImageStore>();
 
             services.AddRazorPages();

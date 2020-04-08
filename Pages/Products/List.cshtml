@@ -32,23 +32,35 @@
 
     <hr />
 
-    <div class="d-flex flex-row flex-wrap align-items-center">
-        @foreach (var product in Model.Products)
-        {
-            <div class="col-md-2 col-4">
-                <a asp-page="./Details" asp-route-productId="@product.Id">
-                    @if(@product.PhotoPath != null)
-                    {
-                        <img src="@product.PhotoPath" class="img-cover img-nohover img-fluid" alt="@product.Name">
-                    }
-                    else
-                    {
-                        <div class="text-center">
-                        <h5 class="text-dark">@product.Name</h5>
-                        </div>
-                    }
-                </a>
-            </div>
-         }
-    </div>
+
+    @foreach (var category in Model.Categories)
+    {
+        <h3>@category</h3>
+        <hr />
+        <div class="d-flex flex-row flex-wrap align-items-center">
+            @foreach (var product in Model.Products.Where(p => p.Category.ToString() == category))
+            {
+                <div class="col-md-2 col-4">
+                    <a asp-page="./Details" asp-route-productId="@product.Id">
+                        @if (@product.PhotoPath != null)
+                        {
+                            <figure class="text-center">
+                                <img src="@product.PhotoPath" class="img-cover img-nohover img-fluid" alt="@product.Name">
+                                <figcaption class="text-dark">@product.Name</figcaption>
+                            </figure>
+                            
+                        }
+                        else
+                        {
+                            <div class="text-center">
+                                <h5 class="text-dark">@product.Name</h5>
+                            </div>
+                        }
+                    </a>
+                </div>
+            }
+        </div>
+        <hr />
+    }
+
 </div>

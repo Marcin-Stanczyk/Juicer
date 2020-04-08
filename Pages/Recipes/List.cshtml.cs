@@ -11,21 +11,26 @@ namespace Juicer.Pages.Recipes
 {
     public class ListModel : PageModel
     {
-        private readonly IRecipeData recipeData;
+        private readonly IJuicerRepository repository;
 
         public IEnumerable<Recipe> Recipes { get; set; }
 
-        [BindProperty(SupportsGet =true)]
+        [TempData]
+        public string Message { get; set; }
+
+        [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
 
-        public ListModel(IRecipeData recipeData)
+        public ListModel(IJuicerRepository repository)
         {
-            this.recipeData = recipeData;
+            this.repository = repository;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            Recipes = recipeData.GetRecipesByName(SearchTerm);
+            Recipes = await repository.GetAllRecipesAsync(SearchTerm);
+
+            return Page();
         }
     }
 }

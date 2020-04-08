@@ -11,18 +11,18 @@ namespace Juicer.Pages.Recipes
 {
     public class DeleteModel : PageModel
     {
-        private readonly IRecipeData recipeData;
+        private readonly IJuicerRepository repository;
 
         public Recipe Recipe { get; set; }
 
-        public DeleteModel(IRecipeData recipeData)
+        public DeleteModel(IJuicerRepository repository)
         {
-            this.recipeData = recipeData;
+            this.repository = repository;
         }
 
-        public IActionResult OnGet(int recipeId)
+        public async Task<IActionResult> OnGet(int recipeId)
         {
-            Recipe = recipeData.GetRecipeById(recipeId);
+            Recipe = await repository.GetRecipeAsync(recipeId);
 
             if (Recipe == null)
                 return RedirectToPage("./NotFound");
@@ -30,13 +30,14 @@ namespace Juicer.Pages.Recipes
             return Page();
         }
 
-        public IActionResult OnPost(int recipeId)
+        public async Task<IActionResult> OnPost(int recipeId)
         {
-            var recipe = recipeData.Delete(recipeId);
-            recipeData.Commit();
-
+            var recipe = await repository.GetRecipeAsync(recipeId);
             if (recipe == null)
                 return RedirectToPage("./NotFound");
+
+            repository.Delete(recipe);
+            await repository.SaveChangesAsync();
 
             TempData["Message"] = $"{recipe.Name} deleted.";
             return RedirectToPage("./List");

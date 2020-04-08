@@ -30,7 +30,6 @@ namespace Juicer.Pages.Recipes
         public async Task<IActionResult> OnGet(int recipeId)
         {
             var recipeInDb = await repository.GetRecipeAsync(recipeId);
-
             if (recipeInDb == null)
                 return RedirectToPage("../Recipes/NotFound");
 
@@ -54,7 +53,7 @@ namespace Juicer.Pages.Recipes
                     return RedirectToPage("./Details", new { recipeId = recipeInDb.Id });
                 }
             }
-            return RedirectToPage("../Recipes/NotFound");
+            return RedirectToPage("./NotFound");
         }
     }
 }

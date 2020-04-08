@@ -4,9 +4,15 @@
     {
         Dairy,
         Fruits,
-        Grains_Beans_Nuts,
+        Grains,
+        Seeds,
+        Nuts,
         Meat,
         Seafood,
-        Vegetables
+        Vegetables,
+        Seasoning,
+        Oils,
+        Beverages,
+        Other
     }
 }

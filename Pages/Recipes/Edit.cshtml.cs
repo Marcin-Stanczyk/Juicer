@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Juicer.Core;
-using Juicer.Data;
 using Juicer.Juicer.Core;
 using Juicer.Juicer.Data;
 using Juicer.Juicer.Dtos;
@@ -16,39 +14,39 @@ namespace Juicer.Pages.Recipes
 {
     public class EditModel : PageModel
     {
-        private readonly IRecipeData recipeData;
         private readonly IHtmlHelper htmlHelper;
-        private readonly IProductData productData;
         private readonly IMapper mapper;
+        private readonly IJuicerRepository repository;
 
         [BindProperty]
         public RecipeDto RecipeDto { get; set; }
-
         public IEnumerable<SelectListItem> Units { get; set; }
-
         public IEnumerable<SelectListItem> Products { get; set; }
 
-        public EditModel(IRecipeData recipeData, IHtmlHelper htmlHelper, IProductData productData, IMapper mapper)
+        public EditModel(IHtmlHelper htmlHelper, IMapper mapper, IJuicerRepository repository)
         {
-            this.recipeData = recipeData;
             this.htmlHelper = htmlHelper;
-            this.productData = productData;
             this.mapper = mapper;
+            this.repository = repository;
         }
 
-        public IActionResult OnGet(int? recipeId)
+        public async Task<IActionResult> OnGet(int? recipeId)
         {
             Units = htmlHelper.GetEnumSelectList<UnitType>();
 
-            Products = new SelectList(productData.GetProductsByName(null).Select(p => p.Name));
+            var products = await repository.GetAllProductsAsync();
+            Products = new SelectList(products.Select(p => p.Name));
 
             if (recipeId.HasValue)
-                RecipeDto = mapper.Map<RecipeDto>(recipeData.GetRecipeById(recipeId.Value));
+            {
+                var recipe = await repository.GetRecipeAsync(recipeId.Value);
+                if (recipe == null)
+                    return RedirectToPage("./NotFound");
+
+                RecipeDto = mapper.Map<RecipeDto>(recipe);
+            }
             else
                 RecipeDto = new RecipeDto();
-
-            if (RecipeDto == null)
-                return RedirectToPage("./NotFound");
 
             return Page();
         }
