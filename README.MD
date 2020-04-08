@@ -1,9 +1,8 @@
 Juicer App
 =====
-[Live version deployed on Azure App Service](https://juicer.azurewebsites.net/)
 
 Web application for juice recipes based on [Philips Healthy Recipes](https://www.philips.co.uk/c-m-ho/food-preparation/healthy-drinks-recipe-app).  
-Deployed on Azure.
+[Deployed on Azure.](https://juicer.azurewebsites.net/)
 
 ### Technologies
 * ASP.NET Core 3.1 with Razor Pages
