@@ -11,25 +11,44 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <a asp-page="./List"><< all products</a>
             <h2>@Model.Product.Name</h2>
-            <div>
-                <p>Category: @Model.Product.Category</p>
-
-                @if (Model.Product.PhotoPath != null)
-                {
-                    <img src="@Model.Product.PhotoPath" class="img-fluid" alt="@Model.Product.Name" />
-                }
-                
-                <hr />
-
-                <div class="btn-group-sm">
-                    <a class="btn btn-outline-dark" asp-page="./Edit" asp-route-productId="@Model.Product.Id"><i class="far fa-edit"></i> Edit Product</a>
-                    <a class="btn btn-outline-dark" asp-page="./Image" asp-route-productId="@Model.Product.Id"><i class="far fa-image"></i> Add/Change Photo</a>
-                    <a class="btn btn-outline-dark" asp-page="./Delete" asp-route-productId="@Model.Product.Id"><i class="far fa-trash-alt"></i> Delete</a>
-                </div>
+            <p>Category: @Model.Product.Category</p>
+            <div class="btn-group-sm">
+                <a class="btn btn-outline-dark" asp-page="./Edit" asp-route-productId="@Model.Product.Id"><i class="far fa-edit"></i> Edit Product</a>
+                <a class="btn btn-outline-dark" asp-page="./Image" asp-route-productId="@Model.Product.Id"><i class="far fa-image"></i> Upload Photo</a>
+                <a class="btn btn-outline-dark" asp-page="./Delete" asp-route-productId="@Model.Product.Id"><i class="far fa-trash-alt"></i> Delete</a>
             </div>
         </div>
+        <div class="col-md-4">
+            @if (Model.Product.PhotoPath != null)
+            {
+                <img src="@Model.Product.PhotoPath" class="img-fluid" alt="@Model.Product.Name" />
+            }
+        </div>
     </div>
+    @if (Model.Recipes.Count() > 0)
+    {
+        <h5>Recipes with this product:</h5>
+        <div class="d-flex flex-row flex-wrap align-items-center">
+            @foreach (var recipe in Model.Recipes)
+            {
+                <div class="col-md-2 col-4">
+                    <a asp-page="../Recipes/Details" asp-route-recipeId="@recipe.Id">
+                        @if (@recipe.PhotoPath != null)
+                        {
+                            <img src="@recipe.PhotoPath" class="img-cover img-nohover img-fluid" alt="@recipe.Name">
+                        }
+                        else
+                        {
+                            <div class="text-center">
+                                <h5 class="text-dark">@recipe.Name</h5>
+                            </div>
+                        }
+                    </a>
+                </div>
+            }
+        </div>
+    }
 </div>

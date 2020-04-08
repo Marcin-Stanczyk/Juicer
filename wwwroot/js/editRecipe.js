@@ -169,7 +169,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(recipeDto),
                 success: function () {
-                    location.href = "../List";
+                    location.href = "./Details/" + recipeDto.Id;
                 }
             });
         } else {

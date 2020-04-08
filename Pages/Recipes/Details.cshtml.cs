@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Juicer.Core;
 using Juicer.Juicer.Core;
 using Juicer.Juicer.Data;
 using Juicer.Juicer.Dtos;
@@ -13,23 +14,35 @@ namespace Juicer.Pages.Recipes
 {
     public class DetailsModel : PageModel
     {
-        private readonly IRecipeData recipeData;
         private readonly IMapper mapper;
+        private readonly IJuicerRepository repository;
 
         public RecipeDto RecipeDto { get; set; }
 
-        public DetailsModel(IRecipeData recipeData, IMapper mapper)
+        public List<Product> Products { get; set; }
+
+        public DetailsModel(IMapper mapper, IJuicerRepository repository)
         {
-            this.recipeData = recipeData;
             this.mapper = mapper;
+            this.repository = repository;
+            Products = new List<Product>();
         }
 
-        public IActionResult OnGet(int recipeId)
+        public async Task<IActionResult> OnGet(int recipeId)
         {
-            RecipeDto = mapper.Map<RecipeDto>(recipeData.GetRecipeById(recipeId));
+            var recipe = await repository.GetRecipeAsync(recipeId);
+            RecipeDto = mapper.Map<RecipeDto>(recipe);
 
             if (RecipeDto == null)
                 return RedirectToPage("./NotFound");
+
+            var products = await repository.GetAllProductsAsync();
+
+            foreach (var ingredient in RecipeDto.Ingredients)
+            {
+                var product = products.FirstOrDefault(p => p.Name == ingredient.ProductName);
+                Products.Add(product);
+            }
 
             return Page();
         }

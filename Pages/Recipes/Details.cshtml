@@ -14,13 +14,20 @@
                 <p>
                     @Model.RecipeDto.Description
                 </p>
-                <h6>Ingredients:</h6>
-                <ul>
-                    @foreach (var ingredient in Model.RecipeDto.Ingredients)
-                    {
-                        <li>@ingredient.ProductName @ingredient.Amount @ingredient.Unit</li>
-                    }
-                </ul>
+                <div class="container">
+                    <div class="d-flex flex-row flex-wrap align-items-center">
+                        @foreach(var ingredient in Model.RecipeDto.Ingredients)
+                        {
+                            <div class="col-3 text-center">
+                                <h6>@ingredient.Amount @ingredient.Unit</h6>
+                                <a asp-page="../Products/Details" asp-route-productId="@Model.Products.SingleOrDefault(p => p.Name == ingredient.ProductName).Id">
+                                <img src="@Model.Products.SingleOrDefault(p => p.Name == ingredient.ProductName).PhotoPath" class="img-cover img-fluid" />
+                                </a>
+                                <p>@ingredient.ProductName</p>
+                            </div>
+                        }
+                    </div>
+                </div>
 
                 @if (Model.RecipeDto.Instructions.Length > 0)
                 {
@@ -35,7 +42,7 @@
                 <hr />
                 <div class="btn-group-sm">
                     <a class="btn btn-outline-dark" asp-page="./Edit" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-edit"></i> Edit Recipe</a>
-                    <a class="btn btn-outline-dark" asp-page="./Image" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-image"></i> Add/Change Photo</a>
+                    <a class="btn btn-outline-dark" asp-page="./Image" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-image"></i> Upload Photo</a>
                     <a class="btn btn-outline-dark" asp-page="./Delete" asp-route-recipeId="@Model.RecipeDto.Id"><i class="far fa-trash-alt"></i> Delete</a>
                 </div>
                 <hr />

@@ -57,16 +57,21 @@
 
     <br />
 
+    <h1 class="display-4 text-center">Recent Recipes</h1>
+    <hr />
+
     <div class="row">
-        @for (int i = 0; i < @Model.Recipes.Length; i++)
+        @foreach (var recipe in Model.Recipes)
         {
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <div class="text-center">
-                    <a asp-page="Recipes/Details" asp-route-recipeId="@Model.Recipes[i].Id"><img class="rounded-circle img-cover img-nohover" style="width:50%; height:auto;" src="@Model.Recipes[i].PhotoPath" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"></a>
-                    <h2 class="text-truncate">@Model.Recipes[i].Name</h2>
-                    <p class="text-truncate">@Model.Recipes[i].Description</p>
-                    <p><a class="btn btn-outline-dark" asp-page="Recipes/Details" asp-route-recipeId="@Model.Recipes[i].Id">View</a></p>
-</div>
+                    <a asp-page="Recipes/Details" asp-route-recipeId="@recipe.Id">
+                        <img class="rounded-circle img-cover img-nohover"  style="width:50%; height:auto;" src="@recipe.PhotoPath">
+                    </a>
+                    <h2 class="text-truncate">@recipe.Name</h2>
+                    <p class="text-truncate">@recipe.Description</p>
+                    <p><a class="btn btn-outline-dark" asp-page="Recipes/Details" asp-route-recipeId="@recipe.Id">View</a></p>
+                </div>
             </div>
         }
     </div>

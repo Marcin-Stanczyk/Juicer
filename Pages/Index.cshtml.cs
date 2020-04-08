@@ -34,12 +34,14 @@ namespace Juicer.Pages
 
             if (recipes.Length > 3)
             {
-                var lastThreeRecipes = new Recipe[] {
-                    recipes[recipes.Length - 1],
-                    recipes[recipes.Length - 2],
-                    recipes[recipes.Length - 3]
-                };
-                Recipes = mapper.Map<RecipeDto[]>(lastThreeRecipes);
+                var recentRecipes = recipes.TakeLast(3).ToArray();
+
+                //var lastThreeRecipes = new Recipe[] {
+                //    recipes[recipes.Length - 1],
+                //    recipes[recipes.Length - 2],
+                //    recipes[recipes.Length - 3]
+                //};
+                Recipes = mapper.Map<RecipeDto[]>(recentRecipes);
             }
             else
             {
