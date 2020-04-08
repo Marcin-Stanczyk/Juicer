@@ -13,3 +13,15 @@ Web application for juice recipes based on [Philips Healthy Recipes](https://www
 * Azure SQL Database
 * Azure Blob Storage
 * [REST API for Recipes](https://github.com/Marcin-Stanczyk/Juicer/blob/master/Juicer.API/RecipesController.cs)
+
+### Future plans
+* Add user authentication and authorization
+* Extend Recipe class with properties like:
+ * Date added / edited
+ * Energy (kcal)
+ * Time needed for preparation (min)
+ * Difficulty level (easy, medium, hard)
+ * Portions with option facility (portions calculator on client-side multiplying ingredients amounts)
+ * Category (Breakfast, Snack, Dinner, etc.)
+ * User Rating
+* Add user profiles

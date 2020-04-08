@@ -61,7 +61,7 @@ namespace Juicer.Pages.Products
                 var productInDb = await repository.GetProductAsync(Product.Id);
                 if (productInDb == null)
                     return RedirectToPage("./NotFound");
-
+           
                 mapper.Map(Product, productInDb);
                 await repository.SaveChangesAsync();
 
