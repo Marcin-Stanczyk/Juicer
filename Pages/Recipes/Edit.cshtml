@@ -23,12 +23,12 @@ else
 
                 <div class="form-group">
                     <label asp-for="RecipeDto.Name"></label>
-                    <input asp-for="RecipeDto.Name" class="form-control" />
+                    <input asp-for="RecipeDto.Name" required maxlength="30" class="form-control" />
                 </div>
 
                 <div class="form-group">
                     <label asp-for="RecipeDto.Description"></label>
-                    <textarea asp-for="RecipeDto.Description" class="form-control"></textarea>
+                    <textarea asp-for="RecipeDto.Description" required class="form-control"></textarea>
                 </div>
 
                 <div class="form-group">

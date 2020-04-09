@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Juicer.Core;
 using Juicer.Juicer.Core;
 using Juicer.Juicer.Dtos;
 using System;
@@ -30,6 +31,9 @@ namespace Juicer.MappingProfiles
                 .ForMember(i => i.Product, o => o.Ignore())
                 .AfterMap((ingredientDto, ingredient) =>
                 ingredient.Unit = Enum.Parse<UnitType>(ingredientDto.Unit));
+
+            this.CreateMap<Product, Product>()
+                .ForMember(p => p.PhotoPath, o => o.Ignore());
         }
     }
 }

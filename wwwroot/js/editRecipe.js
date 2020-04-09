@@ -131,59 +131,64 @@
 
     // ------------------------------------------------------------
 
+    $("#newRecipe").validate({
+        submitHandler: function () {
+            event.preventDefault();
+
+            recipeDto.name = $("#nameView").text();
+            recipeDto.description = $("#descriptionView").text();
+
+            recipeDto.instructions = [];
+            $("#instructionsView li").each(function () {
+                let element = $(this).text();
+                recipeDto.instructions.push(element);
+            });
+
+            recipeDto.ingredients = [];
+            $("#ingredientsView tr").each(function () {
+
+                let newIngredient = {
+                    "productName": $(this).find($(".product")).text(),
+                    "amount": $(this).find($(".amount")).text(),
+                    "unit": $(this).find($(".unit")).text()
+                };
+                recipeDto.ingredients.push(newIngredient);
+
+            });
+
+
+
+            if ($("#RecipeDto_Id").val() > 0) {
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/recipes/" + $("#RecipeDto_Id").val(),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(recipeDto),
+                    success: function () {
+                        location.href = "../Details/" + $("#RecipeDto_Id").val();
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/recipes",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(recipeDto),
+                    success: function () {
+                        location.href = "./List";
+                    }
+                });
+            }
+
+        }
+    });
 
     // POST or PUT RecipeDto to DB
-    $("#submitBtn").on("click", function () {
-        event.preventDefault();
-
-        recipeDto.name = $("#nameView").text();
-        recipeDto.description = $("#descriptionView").text();
-
-        recipeDto.instructions = [];
-        $("#instructionsView li").each(function () {
-            let element = $(this).text();
-            recipeDto.instructions.push(element);
-        });
-
-        recipeDto.ingredients = [];
-        $("#ingredientsView tr").each(function () {
-
-            let newIngredient = {
-                "productName": $(this).find($(".product")).text(),
-                "amount": $(this).find($(".amount")).text(),
-                "unit": $(this).find($(".unit")).text()
-            };
-            recipeDto.ingredients.push(newIngredient);
-
-        });
-
-
-
-        if ($("#RecipeDto_Id").val() > 0) {
-            $.ajax({
-                type: "PUT",
-                url: "/api/recipes/" + $("#RecipeDto_Id").val(),
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(recipeDto),
-                success: function () {
-                    location.href = "../Details/" + $("#RecipeDto_Id").val();
-                }
-            });
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "/api/recipes",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(recipeDto),
-                success: function () {
-                    location.href = "../List";
-                }
-            });
-        }
-
+    //$("#submitBtn").on("click", function () {
         
         
-    });
+        
+    //});
 });
