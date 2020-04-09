@@ -15,6 +15,9 @@ Web application for juice recipes based on [Philips Healthy Recipes](https://www
 * REST API for Recipes [=> /api/recipes](https://juicer.azurewebsites.net/api/recipes) or [see code file](https://github.com/Marcin-Stanczyk/Juicer/blob/master/Juicer.API/RecipesController.cs)
 
 ### Future plans
+* Add custom validation
+* Add Typeahead when selecting Product for Recipe
+* Add possibility to create new Product on the fly (on Recipe Edit's page)
 * Add user authentication and authorization
 * Extend Recipe class with properties like:
   * Date added / edited
