@@ -11,7 +11,7 @@
 <body>
     <header>
         @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">Juicer</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,6 +28,13 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+        </nav>*@
+        <nav class="navbar navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container text-left">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Juicer</a>
+                <a class="nav-link text-light" asp-area="" asp-page="/Recipes/List">Recipes</a>
+                <a class="nav-link text-light" asp-area="" asp-page="/Products/List">Products</a>
             </div>
         </nav>
     </header>
