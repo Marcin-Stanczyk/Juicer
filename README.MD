@@ -4,8 +4,6 @@ Juicer App
 Web application for juice recipes based on [Philips Healthy Recipes](https://www.philips.co.uk/c-m-ho/food-preparation/healthy-drinks-recipe-app).  
 [Deployed on Azure.](https://juicer.azurewebsites.net/)
 
-![Juicer](http://codera.pl/images/projects/NewRecipe.gif)
-
 ### Technologies
 * ASP.NET Core 3.1 with Razor Pages
 * Entity Framework Core 3.1.2
