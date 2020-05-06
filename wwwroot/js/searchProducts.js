@@ -19,8 +19,6 @@ $(function () {
 
         // using RegExp to clear input from whitespaces
         let searchValue = $(this).val().replace(/\s+/g, " ").trim().toLowerCase();
-
-        console.log(searchValue);
         
         if (searchValue.length >= minSearchLetters) {
             let searchResult = searchByNameAndCategory(searchValue, products);
