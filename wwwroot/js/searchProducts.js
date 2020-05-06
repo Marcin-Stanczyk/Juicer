@@ -16,7 +16,9 @@ $(function () {
 
     $("#search-input").on("keyup", function() {
         clearSearch();
-        let searchValue = $(this).val();
+
+        // using RegExp to clear input from whitespaces
+        let searchValue = $(this).val().replace(/\s+/g, " ").trim();;
         
         if (searchValue.length >= minSearchLetters) {
             let searchResult = searchByNameAndCategory(searchValue, products);
@@ -35,12 +37,10 @@ $(function () {
     function searchByNameAndCategory(searchValue, searchArray) {
        
         let results = [];
-        let cleanedValue = searchValue.trim().toLowerCase();
-
         results = searchArray.filter(function (element) {
             return results.indexOf(element) === notFound
-                    && element.name.toLowerCase().includes(cleanedValue)
-                    || element.category.toLowerCase().startsWith(cleanedValue);
+                    && element.name.toLowerCase().includes(searchValue)
+                    || element.category.toLowerCase().startsWith(searchValue);
         });
 
         if (results.length) {
@@ -82,9 +82,7 @@ $(function () {
 
     function fillSearchWithNotFound(searchValue) {
         $("#search-list").append(
-            `<li class="list-group-item">
-                Didn't find any products with <strong><mark>${searchValue}</strong></mark> in their name.
-            </li>`);
+            `<li class="list-group-item">Didn't find any products with <strong><mark>${searchValue}</strong></mark> in their name.</li>`);
     };
 
     function activateSearchListEvents() {
