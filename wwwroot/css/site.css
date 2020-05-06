@@ -28,6 +28,10 @@ input.error {
     border: 1px solid red;
 }
 
+#search-list, #see-all-btn {
+    visibility: hidden;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;

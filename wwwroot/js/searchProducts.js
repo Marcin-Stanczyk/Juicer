@@ -10,7 +10,6 @@ $(function () {
         url: "/api/products",
         success: function (response) {
             products = response;
-            clearSearch();
             showGalleryOf(products);
         }
     });
