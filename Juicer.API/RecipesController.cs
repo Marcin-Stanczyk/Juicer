@@ -103,5 +103,21 @@ namespace Juicer.Juicer.API
             else
                 return BadRequest("Failed to update the recipe");
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var recipeToDelete = await repository.GetRecipeAsync(id);
+
+            if (recipeToDelete == null)
+                return NotFound($"Could not find recipe with id: {id}.");
+            
+            repository.Delete(recipeToDelete);
+
+            if (await repository.SaveChangesAsync())
+                return Ok();
+            else
+                return BadRequest("Failed to delete the recipe.");
+        }
     }
 }

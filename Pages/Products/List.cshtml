@@ -9,58 +9,30 @@
     <div class="alert alert-info">@Model.Message</div>
 }
 
-
 <div class="container">
 
     <h1 class="text-center display-4">Products</h1>
 
-    <form method="get">
-        <div class="btn-toolbar justify-content-between">
-            <div class="btn-group">
-                <a asp-page="./Edit" class="btn btn-primary">New</a>
-            </div>
-            <div class="input-group">
-                <input type="search" class="form-control" placeholder="Search:" asp-for="SearchTerm" />
-                <div class="input-group-append">
-                    <button class="btn">
-                        <i class="fas fa-search"></i>
-                    </button>
+    <div class="d-flex flex-wrap">
+        <div class="mr-auto">
+            <a asp-page="./Edit" class="btn btn-primary">New</a>
+        </div>
+        <div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-dark" type="button" id="see-all-btn">See All</button>
                 </div>
+                <input type="text" class="form-control" placeholder="Search: " id="search-input">
             </div>
         </div>
-    </form>
+    </div>
+    <ul class="list-group float-right" id="search-list"></ul>
 
     <hr />
 
-
-    @foreach (var category in Model.Categories)
-    {
-        <h3>@category</h3>
-        <hr />
-        <div class="d-flex flex-row flex-wrap align-items-center">
-            @foreach (var product in Model.Products.Where(p => p.Category.ToString() == category))
-            {
-                <div class="col-md-2 col-4">
-                    <a asp-page="./Details" asp-route-productId="@product.Id">
-                        @if (@product.PhotoPath != null)
-                        {
-                            <figure class="text-center">
-                                <img src="@product.PhotoPath" class="img-cover img-nohover img-fluid" alt="@product.Name">
-                                <figcaption class="text-dark">@product.Name</figcaption>
-                            </figure>
-                            
-                        }
-                        else
-                        {
-                            <div class="text-center">
-                                <h5 class="text-dark">@product.Name</h5>
-                            </div>
-                        }
-                    </a>
-                </div>
-            }
-        </div>
-        <hr />
-    }
-
+    <div id="gallery"></div>
 </div>
+
+@section Scripts {
+    <script src="~/js/searchProducts.js"></script>
+}

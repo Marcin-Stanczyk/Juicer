@@ -1,12 +1,5 @@
 ﻿$(function () {
 
-    // Creating new Recipe Data Transfer Object
-    // Filling it with user input
-    // Showing it's preview on screen at the same time
-    // Posting to DB with jQuery.AJAX
-
-    // -----------------------------------------------
-
     var recipeDto;
 
     if ($("#RecipeDto_Id").val() > 0) {
@@ -184,11 +177,4 @@
 
         }
     });
-
-    // POST or PUT RecipeDto to DB
-    //$("#submitBtn").on("click", function () {
-        
-        
-        
-    //});
 });
