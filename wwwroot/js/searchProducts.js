@@ -28,6 +28,7 @@ $(function () {
 
     function clearSearch() {
         $("#search-list").empty();
+        $("#search-list").css("visibility", "hidden");
         $("#see-all-btn").css("visibility","hidden");
     };
 
