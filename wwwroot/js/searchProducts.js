@@ -14,6 +14,54 @@ $(function () {
         }
     });
 
+    function showGalleryOf(elements) {
+        clearGallery();
+
+        let categories = [];
+        elements.forEach(function(element) {
+            if (categories.indexOf(element.category) == notFound) {
+                categories.push(element.category);
+            }
+        });
+
+        categories.sort();
+        categories.forEach(function(category) {
+            appendCategory(category);
+
+            let productsWithThisCategory = elements.filter(function(element) {
+                return element.category == category;
+            });
+            productsWithThisCategory.forEach(function(product) {
+                appendProductToCategory(product, category);
+            });
+        });   
+    };
+
+    function clearGallery() {
+        $("#gallery").empty();
+    };
+
+    function appendCategory(category) {
+        $("#gallery").append(
+            `<h3>${category}</h3>
+            <hr>
+            <div class="d-flex flex-row flex-wrap align-items-center" id="${category}">`
+        );
+    };
+
+    function appendProductToCategory(product, category) {
+        $(`#${category}`).append(
+            `<div class="col-md-2 col-4">
+                <a href="./Details/${product.id}"> 
+                    <figure class="text-center">
+                        <img src="${product.photoPath}" class="img-cover img-nohover img-fluid">
+                        <figcaption class="text-dark">${product.name}</figcaption>
+                    </figure>
+                </a>
+            </div>`
+        );
+    };
+
     $("#search-input").on("keyup", function() {
         clearSearch();
 
@@ -67,6 +115,13 @@ $(function () {
         }        
     };
 
+    function showGalleryOfAll() {
+        if (filtered) {
+            showGalleryOf(products);
+            filtered = false;
+        }
+    };
+
     function showSearchList() {
         $("#search-list").css("visibility","visible");
         showSeeAllButton();
@@ -84,6 +139,15 @@ $(function () {
         $("#search-list").append(
             `<li class="list-group-item">Didn't find any products with <strong><mark>${searchValue}</strong></mark> in their name.</li>`);
     };
+
+    function showSeeAllButton() {
+        $("#see-all-btn").css("visibility","visible");
+        $("#see-all-btn").on("click", function() {
+            clearSearch();
+            showGalleryOfAll();
+            setInput("");
+        });
+    }
 
     function activateSearchListEvents() {
         let initialInput = $("#search-input").val();
@@ -111,51 +175,8 @@ $(function () {
         });
     };
 
-    function showSeeAllButton() {
-        $("#see-all-btn").css("visibility","visible");
-        $("#see-all-btn").on("click", function() {
-            clearSearch();
-            showGalleryOfAll();
-            setInput("");
-        });
-    }
-
     function setInput(value) {
         $("#search-input").val(value);
-    };
-
-    function clearGallery() {
-        $("#gallery").empty();
-    };
-    
-    function showGalleryOfAll() {
-        if (filtered) {
-            showGalleryOf(products);
-            filtered = false;
-        }
-    };
-
-    function showGalleryOf(elements) {
-        clearGallery();
-
-        let categories = [];
-        elements.forEach(function(element) {
-            if (categories.indexOf(element.category) == notFound) {
-                categories.push(element.category);
-            }
-        });
-
-        categories.sort();
-        categories.forEach(function(category) {
-            appendCategory(category);
-
-            let productsWithThisCategory = elements.filter(function(element) {
-                return element.category == category;
-            });
-            productsWithThisCategory.forEach(function(product) {
-                appendProductToCategory(product, category);
-            });
-        });   
     };
 
     function showGalleryOfOne(element) {
@@ -163,25 +184,4 @@ $(function () {
         appendCategory(element.category);
         appendProductToCategory(element, element.category);
     }
-
-    function appendCategory(category) {
-        $("#gallery").append(
-            `<h3>${category}</h3>
-            <hr>
-            <div class="d-flex flex-row flex-wrap align-items-center" id="${category}">`
-        );
-    };
-
-    function appendProductToCategory(product, category) {
-        $(`#${category}`).append(
-            `<div class="col-md-2 col-4">
-                <a href="./Details/${product.id}"> 
-                    <figure class="text-center">
-                        <img src="${product.photoPath}" class="img-cover img-nohover img-fluid">
-                        <figcaption class="text-dark">${product.name}</figcaption>
-                    </figure>
-                </a>
-            </div>`
-        );
-    };
 });
