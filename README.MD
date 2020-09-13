@@ -1,5 +1,6 @@
 Juicer App
 =====
+> Currently switched off due to improvement plans and work in progress.
 
 Web application for juice recipes based on [Philips Healthy Recipes](https://www.philips.co.uk/c-m-ho/food-preparation/healthy-drinks-recipe-app).  
 [Deployed on Azure.](https://juicer.azurewebsites.net/)
